@@ -1,4 +1,4 @@
-class student{
+class Student{
     constructor(name,email){
         this.name=name;
         this.email =email;
@@ -13,6 +13,42 @@ class student{
     }
 }
 
-const student1 = new student('Mukesh','mukesh@gmail.com')
-student1.enroll('full stack web development')
-student1.showCourses()
+class Admission{
+    constructor(){
+        this.students=[]
+    }
+    enrollStudent(student) {
+        this.students.push(student);
+        console.log(`${student.name} has been enrolled.`);
+    }
+
+    assignCourse(student, course) {
+        if (student instanceof Student && student.email && course) {
+            student.enroll(course);
+        } else {
+            console.log('Invalid student or course information.');
+        }
+    }
+
+    showEnrolledStudents() {
+        console.log('Enrolled students:');
+        this.students.forEach(student => {
+            console.log(`- ${student.name} (${student.email})`);
+        });
+    }
+}
+const admissionOffice = new Admission();
+
+const student1 = new Student('Mithun', 'mithun@pw.live');
+const student2 = new Student('Farman', 'farman@pw.live');
+
+admissionOffice.enrollStudent(student1); 
+admissionOffice.enrollStudent(student2); 
+
+admissionOffice.assignCourse(student1, 'Full Stack Web Development'); 
+admissionOffice.assignCourse(student2, 'Data Science Masters'); 
+
+student1.showCourses(); 
+student2.showCourses(); 
+
+admissionOffice.showEnrolledStudents();
